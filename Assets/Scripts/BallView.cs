@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 
 
-public class BallView : MonoBehaviour
+public class BallView : MonoBehaviour, IBallView
 {
 
     public event Action CollidedWithBox;

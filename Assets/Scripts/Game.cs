@@ -7,14 +7,14 @@ public class Game : MonoBehaviour
     private BallPresenter _ballPresenter;
 
     
-    public void Construct(BallView ballView)
+    public void Construct(IBallView ballView)
     {
         _ballView = ballView;
     }
     
     private void Start()
     {
-        var ballModel = new BallModel(_ballInitialHealth);
+        var ballModel = new BallBallModel(_ballInitialHealth);
         _ballPresenter = new BallPresenter(_ballView, ballModel);
     }
 
@@ -23,5 +23,5 @@ public class Game : MonoBehaviour
         _ballPresenter.Dispose();
     }
     
-    private BallView _ballView;
+    private IBallView _ballView;
 }

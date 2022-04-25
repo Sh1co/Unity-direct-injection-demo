@@ -3,14 +3,14 @@ using System;
 
 public class BallPresenter :IDisposable
 {
-    private readonly BallModel _ballModel;
-    private readonly BallView _ballView;
+    private readonly IBallModel _ballBallModel;
+    private readonly IBallView _ballView;
 
-    public BallPresenter(BallView ballView, BallModel ballModel)
+    public BallPresenter(IBallView ballView, IBallModel ballBallModel)
     {
-        _ballModel = ballModel;
+        _ballBallModel = ballBallModel;
         _ballView = ballView;
-        _ballModel.HealthChanged += OnHealthChanged;
+        _ballBallModel.HealthChanged += OnHealthChanged;
         _ballView.CollidedWithBox += OnCollidedWithBox;
         
         OnHealthChanged();
@@ -18,17 +18,17 @@ public class BallPresenter :IDisposable
     
     public void Dispose()
     {
-        _ballModel.HealthChanged -= OnHealthChanged;
+        _ballBallModel.HealthChanged -= OnHealthChanged;
         _ballView.CollidedWithBox -= OnCollidedWithBox;
     }
 
     private void OnCollidedWithBox()
     {
-        _ballModel.OnCollidedWithBox();
+        _ballBallModel.OnCollidedWithBox();
     }
 
     private void OnHealthChanged()
     {
-        _ballView.DisplayHealth(_ballModel.Health);
+        _ballView.DisplayHealth(_ballBallModel.GetHealth());
     }
 }
