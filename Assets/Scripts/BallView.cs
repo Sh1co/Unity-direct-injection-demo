@@ -5,8 +5,15 @@ using UnityEngine;
 
 public class BallView : MonoBehaviour
 {
-    [SerializeField] private TMP_Text _healthText;
 
+    public event Action CollidedWithBox;
+    
+    public void Construct(TMP_Text healthText)
+    {
+        _healthText = healthText;
+    }
+
+    
     private void OnCollisionEnter(Collision collision)
     {
         if (!collision.transform.TryGetComponent(out BoxTag _)) return;
@@ -19,5 +26,6 @@ public class BallView : MonoBehaviour
         _healthText.text = health.ToString();
     }
 
-    public event Action CollidedWithBox;
+    
+    private TMP_Text _healthText;
 }

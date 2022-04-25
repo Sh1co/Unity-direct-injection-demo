@@ -3,10 +3,15 @@ using UnityEngine;
 
 public class Game : MonoBehaviour
 {
-    [SerializeField] private BallView _ballView;
     [SerializeField] private int _ballInitialHealth = 10;
     private BallPresenter _ballPresenter;
 
+    
+    public void Construct(BallView ballView)
+    {
+        _ballView = ballView;
+    }
+    
     private void Start()
     {
         var ballModel = new BallModel(_ballInitialHealth);
@@ -17,4 +22,6 @@ public class Game : MonoBehaviour
     {
         _ballPresenter.Dispose();
     }
+    
+    private BallView _ballView;
 }
